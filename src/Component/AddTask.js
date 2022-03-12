@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { useRef, useContext } from "react";
+import styled, { keyframes } from "styled-components";
+import { useRef, useContext, useState } from "react";
 import AddTaskInput from "../UI/AddTask/AddTaskInput";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
@@ -7,35 +7,63 @@ import TaskContext from "../Store/TaskContext";
 import { v4 as uuidv4 } from "uuid";
 
 const AddTask = (props) => {
+  const [categoryValue, setCategoryValue] = useState("");
+  const [taskValue, setTaskValue] = useState("");
+  const [inputIsEmpty,setInputIsEmpty] = useState(false);
+  
   const TaskCtx = useContext(TaskContext);
-  const CategoryInput = useRef("");
-  const TaskInput = useRef("");
 
   const addTaskHandler = () => {
-    let category = CategoryInput.current.value
-    let task = TaskInput.current.value
-    if(category.length === 0 || task.length === 0)
+    let category = categoryValue;
+    let task = taskValue;
+    if((category.trim().length === 0) || (task.trim().length === 0))
     {
-      alert('欄位要填寫好唷')
-      return
+      setInputIsEmpty(true)
+      return;
     }
     TaskCtx.addTask({
       id: uuidv4(),
-      category: category,
-      task: task,
+      category: categoryValue,
+      task: taskValue,
       created_time: Date.now(),
     });
-    CategoryInput.current.value = '';
-    TaskInput.current.value = '';
+    setCategoryValue("");
+    setTaskValue("");
+    setInputIsEmpty(false)
   };
+  const categoryValueHandler = (value) => {
+    setCategoryValue(value);
+  };
+  const taskValueHandler = (value) => {
+    setTaskValue(value);
+  };
+  const inputIsEmptyHandler = () => {
+    setInputIsEmpty(false)
+  }
   return (
     <StyledAddTask>
-      
-      <AddTaskInput placeholder="Category" width="30%" ref={CategoryInput} />
-      <AddTaskInput placeholder="Add Task..." width="50%" ref={TaskInput} />
-      
+      <AddTaskInput
+        id="Category"
+        width="30%"
+        value={categoryValue}
+        onValueHandler={categoryValueHandler}
+        inputIsEmpty={inputIsEmpty}
+        inputIsEmptyHandler={inputIsEmptyHandler}
+      />
+      <AddTaskInput
+        id="Task"
+        width="50%"
+        value={taskValue}
+        onValueHandler={taskValueHandler}
+        inputIsEmpty={inputIsEmpty}
+        inputIsEmptyHandler={inputIsEmptyHandler}
+      />
+
       <StyledBtn onClick={addTaskHandler}>
-        <FontAwesomeIcon icon={faChevronRight} style={{ color: "white" }} />
+        <FontAwesomeIcon
+          icon={faChevronRight}
+          style={{ color: "white",cursor:"pointer" }}
+        />
       </StyledBtn>
     </StyledAddTask>
   );
@@ -43,20 +71,26 @@ const AddTask = (props) => {
 
 const StyledAddTask = styled.div`
   width: 80%;
-  margin: 0px auto;
+  margin: 10px auto;
   padding: 0px 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
 `;
 const StyledBtn = styled.button`
+  position: relative;
   border-radius: 100%;
   padding: 0px;
   margin: 0px;
-  width: 30px;
-  height: 30px;
-  background-color: #fb9300;
+  width: 35px;
+  height: 35px;
+  background-color: #363848;
   border: 0;
+  top: 0px;
+  transition: 0.3s;
+  &:hover {
+    background-color: #2b2d3a;
+  }
 `;
+
 export default AddTask;

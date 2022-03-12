@@ -14,7 +14,11 @@ const List = (props) => {
       />
     );
   });
-  return <StyledList>{ListItems}</StyledList>;
+  return (
+    <StyledList>
+      {ListItems.length !== 0 ? ListItems : <StyledText>No Todo</StyledText>}
+    </StyledList>
+  );
 };
 
 const StyledList = styled.ul`
@@ -23,5 +27,10 @@ const StyledList = styled.ul`
   padding: 0;
   border-radius: 5px;
   list-style-type: none;
+  
+`;
+const StyledText = styled.div`
+  line-height: 38px;
+  height: 38px;
 `;
 export default List;

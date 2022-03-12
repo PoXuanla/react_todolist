@@ -18,5 +18,6 @@ const StyledInput = styled.input`
   text-align:center;
   font-size:15px;
   font-weight:bold;
+  
 `;
 export default TaskListLiInput;

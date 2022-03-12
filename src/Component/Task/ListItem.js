@@ -55,7 +55,10 @@ const ListItem = (props) => {
           />
         }
         {!isEdit ? (
-          <div onDoubleClick={contentDBClickHandler} style={{ userSelect: "none" }}>
+          <div
+            onDoubleClick={contentDBClickHandler}
+            style={{ userSelect: "none", color: "#3f3f3f" }}
+          >
             {props.task}
           </div>
         ) : (
@@ -79,18 +82,12 @@ const StyledListItem = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
+
+  &:not(:last-of-type) {
+    margin-bottom: 15px;
+  }
   animation: ${(props) =>
     props.isHidden ? "fadein .5s linear" : "fadeout 1s linear"};
-  @-webkit-keyframes fadeout {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
-  }
-
   @keyframes fadeout {
     0% {
       opacity: 1;
@@ -113,19 +110,23 @@ const StyledListItem = styled.li`
   .Category {
     width: 10%;
     height: 30px;
-    background-color: #ffab38;
+
+    background-color: #d0b0b0;
     border-radius: 20px;
     line-height: 30px;
-    font-size: 10px;
-    color: #faf9fb;
+    font-size: 14px;
+    color: #3f3f3f;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
   }
   .Task {
     width: 70%;
     height: 35px;
-    background: white;
+    background: #3f3f3f;
     border-radius: 10px;
     line-height: 35px;
     text-align: center;
+    background-color: #dadfdf;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
   }
   .Input {
     width: 100%;
@@ -134,6 +135,8 @@ const StyledListItem = styled.li`
     text-align: center;
     font-size: 15px;
     font-weight: bold;
+    background-color: #dadfdf;
+    color: #3f3f3f;
   }
   button {
     height: 35px;
@@ -141,8 +144,15 @@ const StyledListItem = styled.li`
     border-radius: 50%;
     border: 0;
     margin: 0 0px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    background-color: #dadfdf;
+
     &:not(:last-of-type) {
-      margin:3px 5px 0 0 ;
+      margin: 3px 5px 0 0;
+    }
+    transition: 0.4s;
+    &:hover {
+      background-color: #92a3a2;
     }
   }
 `;
