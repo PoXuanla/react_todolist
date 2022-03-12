@@ -16,7 +16,7 @@ const StyledInput = styled.input`
   outline:none;
   border:none;
   text-align:center;
-  font-size:15px;
+  font-size:1.5rem;
   font-weight:bold;
   
 `;

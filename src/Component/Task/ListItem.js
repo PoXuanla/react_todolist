@@ -84,7 +84,7 @@ const StyledListItem = styled.li`
   align-items: center;
 
   &:not(:last-of-type) {
-    margin-bottom: 15px;
+    margin-bottom: 1.5rem;
   }
   animation: ${(props) =>
     props.isHidden ? "fadein .5s linear" : "fadeout 1s linear"};
@@ -109,46 +109,46 @@ const StyledListItem = styled.li`
   }
   .Category {
     width: 10%;
-    height: 30px;
+    height: 3rem;
 
     background-color: #d0b0b0;
-    border-radius: 20px;
-    line-height: 30px;
-    font-size: 14px;
+    border-radius: 2rem;
+    line-height: 3rem;
+    font-size: 1.4rem;
     color: #3f3f3f;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: .2rem .2rem .2rem .1rem rgba(0, 0, 0, 0.2);
   }
   .Task {
     width: 70%;
-    height: 35px;
+    height: 3.5rem;
     background: #3f3f3f;
-    border-radius: 10px;
-    line-height: 35px;
+    border-radius: 1rem;
+    line-height: 3.5rem;
     text-align: center;
     background-color: #dadfdf;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: .2rem .2rem .2rem .1rem rgba(0, 0, 0, 0.2);
   }
   .Input {
     width: 100%;
     outline: none;
     border: none;
     text-align: center;
-    font-size: 15px;
+    font-size: 1.5rem;
     font-weight: bold;
     background-color: #dadfdf;
     color: #3f3f3f;
   }
   button {
-    height: 35px;
-    width: 35px;
+    height: 3.5rem;
+    width: 3.5rem;
     border-radius: 50%;
     border: 0;
     margin: 0 0px;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: .2rem .2rem .2rem .1rem rgba(0, 0, 0, 0.2);
     background-color: #dadfdf;
 
     &:not(:last-of-type) {
-      margin: 3px 5px 0 0;
+      margin: .3rem .5rem 0 0;
     }
     transition: 0.4s;
     &:hover {

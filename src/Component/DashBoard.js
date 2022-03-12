@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import AddTask from "./AddTask";
-import FilterLine from "../UI/FilterLine";
+import AddTask from "./AddTask/AddTask";
 import List from "./Task/List";
 const DashBoard = (props) => {
   return (
@@ -17,19 +16,18 @@ const DashBoard = (props) => {
   );
 };
 const StyledHeader = styled.div`
-height:20%;
+  height:20%;
 `;
 const StyledContent = styled.div`
   max-height:68%;
-  padding:15px 0;
-  border-radius:3px;
+  padding:1.5rem 0;
+  border-radius:.3rem;
   background-color: #2f4f4f;
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-  
+  box-shadow: .2rem .2rem .2rem .1rem rgba(0, 0, 0, 0.2);
   overflow-y:scroll;
 `;
 const StyledDashBoard = styled.div`
-  margin: 10px 0;
+  margin: 1rem 0;
   width: 80%;
   
 `;

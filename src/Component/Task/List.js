@@ -25,12 +25,12 @@ const StyledList = styled.ul`
   width: 80%;
   margin: 0 auto;
   padding: 0;
-  border-radius: 5px;
+  border-radius: .5rem;
   list-style-type: none;
   
 `;
 const StyledText = styled.div`
-  line-height: 38px;
-  height: 38px;
+  line-height: 3.8rem;
+  height: 3.8rem;
 `;
 export default List;

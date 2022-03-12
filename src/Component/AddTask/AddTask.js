@@ -1,9 +1,9 @@
 import styled, { keyframes } from "styled-components";
 import { useRef, useContext, useState } from "react";
-import AddTaskInput from "../UI/AddTask/AddTaskInput";
+import AddTaskInput from "./AddTaskInput";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import TaskContext from "../Store/TaskContext";
+import TaskContext from "../../Store/TaskContext";
 import { v4 as uuidv4 } from "uuid";
 
 const AddTask = (props) => {
@@ -71,7 +71,7 @@ const AddTask = (props) => {
 
 const StyledAddTask = styled.div`
   width: 80%;
-  margin: 10px auto;
+  margin: 1rem auto;
   padding: 0px 0px;
   display: flex;
   justify-content: space-between;
@@ -82,11 +82,11 @@ const StyledBtn = styled.button`
   border-radius: 100%;
   padding: 0px;
   margin: 0px;
-  width: 35px;
-  height: 35px;
+  width: 3.5rem;
+  height: 3.5rem;
   background-color: #363848;
   border: 0;
-  top: 0px;
+  top: 0;
   transition: 0.3s;
   &:hover {
     background-color: #2b2d3a;

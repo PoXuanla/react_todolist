@@ -44,7 +44,7 @@ const AddTaskInput = (props) => {
 
 const StyledAddTaskInput = styled.div`
   position: relative;
-  height: 35px;
+  height: 3.5rem;
   width: ${(props) => props.width || "auto"};
   .form__input {
     width: 100%;
@@ -52,8 +52,8 @@ const StyledAddTaskInput = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    padding: 7px;
-    border-radius: 5px;
+    padding: .7rem;
+    border-radius: .5rem;
     background-color: #dadfdf;
     border: 2px solid #2a324b;
     outline: none;
@@ -61,9 +61,9 @@ const StyledAddTaskInput = styled.div`
   .form__label {
     position: absolute;
     top: 50%;
-    left: 7px;
+    left: .7rem;
     transform: translate(0, -50%);
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #2f4f4f;
     cursor: text;
     background-color: #dadfdf;
@@ -71,10 +71,10 @@ const StyledAddTaskInput = styled.div`
   }
   .form__input:focus ~ .form__label,
   .form__input:not(:placeholder-shown).form__input:not(:focus) ~ .form__label {
-    top: -0.5px;
-    left: 7px;
-    padding: 0 3px;
-    font-size: 8px;
+    top: -.1rem;
+    left: .7rem;
+    padding: 0 .3rem;
+    font-size: .8rem;
     background-color: #dadfdf;
   }
   .form__label--error {
