@@ -1,5 +1,8 @@
 import styled from "styled-components";
+
 import React, { useState, useEffect } from "react";
+
+import {inputError,labelError} from "../../Keyframes/AddTaskAnimation";
 
 const AddTaskInput = (props) => {
   const animationTime = 500; //ms
@@ -75,67 +78,18 @@ const StyledAddTaskInput = styled.div`
     background-color: #dadfdf;
   }
   .form__label--error {
-    animation-name: labelErrorAnimation;
+    animation-name: ${labelError};
     animation-duration: ${(props) => {
       let animationTime = props.animationTime / 1000 + "s";
       return animationTime;
     }};
   }
   .form__input--error {
-    animation-name: inputErrorAnimation;
+    animation-name: ${inputError};
     animation-duration: ${(props) => {
       let animationTime = props.animationTime / 1000 + "s";
       return animationTime;
     }};
-  }
-  @keyframes inputErrorAnimation {
-    0% {
-      border: 2px solid #2f4f4f;
-    }
-    50% {
-      border: 2px solid #008080;
-    }
-    100% {
-      border: 2px solid #2f4f4f;
-    }
-  }
-  @keyframes labelErrorAnimation {
-    0% {
-      left: 5px;
-      color: #2f4f4f;
-    }
-    15% {
-      left: 7.5px;
-    }
-    25% {
-      left: 5px;
-    }
-    35% {
-      left: 7.5px;
-    }
-    45% {
-      left: 5px;
-    }
-    55% {
-      left: 7.5px;
-      color: #008080;
-    }
-    65% {
-      left: 5px;
-    }
-    75% {
-      left: 7.5px;
-    }
-    85% {
-      left: 5px;
-    }
-    95% {
-      left: 6.5px;
-    }
-    100% {
-      left: 5px;
-      color: #2f4f4f;
-    }
   }
 `;
 
