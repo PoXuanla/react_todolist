@@ -1,6 +1,6 @@
 import ListItem from "../ListItem";
 import TaskContext from "../../Store/TaskContext";
-import { useContext } from "react/cjs/react.development";
+import { useContext } from "react";
 import { StyledTask, Container, Text } from "./Styles";
 
 const Task = (props) => {

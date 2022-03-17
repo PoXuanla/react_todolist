@@ -2,7 +2,7 @@ import React from "react";
 
 const TaskContext = React.createContext({
     tasks: [],
-    filterMode:'createdTime',
+    filterMode:'CreatedTime',
     addTask: (task) => {},
     removeItem: (id)=>{},
     editTask: (id,data)=>{},
