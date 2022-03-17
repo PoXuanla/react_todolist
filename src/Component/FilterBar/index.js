@@ -20,7 +20,6 @@ const FilterBar = () => {
   };
   const changeFilterModeHandler = (e) => {
     setShowFilterSelect((prev) => !prev);
-    console.log(e.target.value)
     setTimeout(() => {
         TaskCtx.changeFilterMode(e.target.value)
     }, 250);

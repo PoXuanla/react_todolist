@@ -6,7 +6,6 @@ const useRWD = () => {
   const handleRWD = () => {
     if (window.innerWidth > 768) {
       setDevice("PC");
-      console.log(1);
     } else setDevice("Mobile");
   };
   useEffect(() => {
