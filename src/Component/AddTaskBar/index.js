@@ -1,76 +1,85 @@
 import { useContext, useState, useRef } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import TaskContext from "../../Store/TaskContext";
 import { v4 as uuidv4 } from "uuid";
-import { StyledAddTaskBar, Container, Button, CategoryGroup } from "./Styles";
-import AddTaskInput from "../AddTaskInput";
-
-import useRWD from "../../CustomHook/useRWD";
+import {
+  StyledAddTaskBar,
+  Container,
+  TextArea,
+  Footer,
+  CategoryBtn,
+  SubmitBtn,
+  CategoryGroup,
+} from "./Styles";
 
 const AddTaskBar = (props) => {
-  const [categoryActive, setcategoryActive] = useState("Work");
-  const device = useRWD();
+  const [category, setCategory] = useState("Work");
+  const [errorAni, setErrorAni] = useState(false);
   const ref = useRef(null);
-
   const TaskCtx = useContext(TaskContext);
-
+  const AnimationTime = 500;
   const addTaskHandler = () => {
-    let task = ref.current.getInputValue();
+    let task = ref.current.value;
 
     if (task.trim().length === 0) {
-      ref.current.triggerErrorAlert();
+      setErrorAni(true);
+      setTimeout(() => {
+        setErrorAni(false);
+      }, AnimationTime);
       return;
     }
     TaskCtx.addTask({
       id: uuidv4(),
-      category: categoryActive,
+      category: category,
       task: task,
       created_time: Date.now(),
-      finish: false,
+      status: false,
     });
-    return
+    ref.current.value = "";
+    return;
   };
-
-  const categoryActiveHandler = (category) => {
-    setcategoryActive(category);
+  const setCategoryHandler = (category) => {
+    setCategory(category);
   };
   return (
     <StyledAddTaskBar>
       <Container>
-        <CategoryGroup>
-          <button
-            className={categoryActive === "Work" ? "active" : ""}
-            onClick={categoryActiveHandler.bind(null, "Work")}
-          >
-            Work
-          </button>
-          <button
-            className={categoryActive === "Study" ? "active" : ""}
-            onClick={categoryActiveHandler.bind(null, "Study")}
-          >
-            Study
-          </button>
-          <button
-            className={categoryActive === "Other" ? "active" : ""}
-            onClick={categoryActiveHandler.bind(null, "Other")}
-          >
-            Other
-          </button>
-        </CategoryGroup>
-
-        <AddTaskInput
-          id="Task"
+        <TextArea
+          name="123"
+          id=""
+          cols="30"
+          rows="10"
+          placeholder="管理好每件事情 (*´∀`)~♥"
+          autoComplete="off"
           ref={ref}
-          width={device === "PC" ? "50%" : "80%"}
-          animationTime={300}
-        />
-        <Button onClick={addTaskHandler}>
-          <FontAwesomeIcon
-            icon={faChevronRight}
-            style={{ color: "white", cursor: "pointer" }}
-          />
-        </Button>
+        ></TextArea>
+        <Footer AnimationTime={500}>
+          <CategoryGroup>
+            <CategoryBtn
+              onClick={setCategoryHandler.bind(null, "Work")}
+              active={category === "Work"}
+            >
+              工作
+            </CategoryBtn>
+            <CategoryBtn
+              onClick={setCategoryHandler.bind(null, "Study")}
+              active={category === "Study"}
+            >
+              學習
+            </CategoryBtn>
+            <CategoryBtn
+              onClick={setCategoryHandler.bind(null, "Other")}
+              active={category === "Other"}
+            >
+              其他
+            </CategoryBtn>
+          </CategoryGroup>
+          <SubmitBtn
+            onClick={addTaskHandler}
+            active={errorAni}
+          >
+            輸入
+          </SubmitBtn>
+        </Footer>
       </Container>
     </StyledAddTaskBar>
   );

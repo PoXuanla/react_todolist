@@ -11,41 +11,40 @@ export const inputError = keyframes`
     border: .2rem solid #2f4f4f;
   }
 `;
-export const labelError = keyframes`
+export const submitError = keyframes`
   0% {
-    left: .5rem;
-    color: #2f4f4f;
+    margin-right:3px;
+    
   }
   15% {
-    left: .75rem;
+    margin-right:0px;
   }
   25% {
-    left: .5rem;
+    margin-right:3px;
   }
   35% {
-    left: .75rem;
+    margin-right:0px;
   }
   45% {
-    left: .5rem;
+    margin-right:3px;
   }
   55% {
-    left: .75rem;
-    color: #008080;
+    margin-right:0px;
+   
   }
   65% {
-    left: .5rem;
+    margin-right:3px;
   }
   75% {
-    left: .75rem;
+    margin-right:0px;
   }
   85% {
-    left: .5rem;
+    margin-right:3px;
   }
   95% {
-    left: .75rem;
+    margin-right:0px;
   }
   100% {
-    left: .5rem;
-    color: #2f4f4f;
+    margin-right:0px;
   }
 `

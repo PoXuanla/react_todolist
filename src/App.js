@@ -3,8 +3,7 @@ import { ResetStyle, GlobalStyle } from "./Theme";
 import styled from "styled-components";
 import AddTaskBar from "./Component/AddTaskBar";
 import Task from "./Component/Task";
-import FilterBar from "./Component/FilterBar";
-
+import FilterAndSortBar from "./Component/FilterAndSortBar";
 function App() {
   return (
     // <ThemeProvider theme={theme}>
@@ -13,7 +12,7 @@ function App() {
         <GlobalStyle />
         <TaskProvider>
           <AddTaskBar/>
-          <FilterBar/>
+          <FilterAndSortBar/>
           <Task/>
         </TaskProvider>
       </StyledApp>
@@ -24,8 +23,6 @@ const StyledApp = styled.div`
   text-align:center;
   background:#dadfdf;
   height: 100%;
-  @media only screen and (max-width: 768px) {
-    
-  }
+
 `;
 export default App;

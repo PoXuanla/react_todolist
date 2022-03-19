@@ -77,6 +77,19 @@ export const GlobalStyle = createGlobalStyle`
 html {
   box-sizing: border-box;
   font-size: 62.5%; 
-  font-family: 'HelveticaNeue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-family: serif, sans-serif;
+  &::-webkit-scrollbar {
+    width: 6px;
+  };
+
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+  };
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgb(47, 79, 79);
+    border-radius: 5px;
+  };
 }
 `;

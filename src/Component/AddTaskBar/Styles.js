@@ -1,86 +1,99 @@
 import styled from "styled-components";
-import {device} from '../../Theme'
-
+import { color, boxShadow } from "../../Theme";
+import { submitError } from "../../Keyframes/AddTaskAnimation";
 export const StyledAddTaskBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #dadfdf;
+  background: ${color.lightGreen};
 `;
 export const Container = styled.div`
-  box-shadow: 0.2rem 0.2rem 0.2rem 0.1rem rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 600px;
+  height: 150px;
+  border: 1.5px solid rgb(0, 0, 0, 0.2);
+  margin: 0 auto;
+  margin-top: 10px;
+  padding: 10px;
+  padding-bottom: 0;
+  border-radius: 5px;
+  background: ${color.lightGreen};
+  box-shadow: ${boxShadow.basic};
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    margin-top: 0px;
+    border-radius: 0px;
+    box-shadow: none;
+    border: none;
+    border-bottom: 1.5px solid rgb(0, 0, 0, 0.2);
+  }
+`;
+export const TextArea = styled.input`
+  resize: none;
+  height: 100px;
+  width: 100%;
+  outline: none;
+  font-size: 15px;
+  letter-spacing: 5px;
+  line-height: 15px;
+  border-radius: 5px;
+  padding: 10px;
+  border: none;
+  background: ${color.lightGreen};
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${color.darkGreen};
+    border-radius: 5px;
+  }
+`;
+export const Footer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-  margin: 2rem 0;
-  border-radius: 0.3rem;
-  width: 60%;
-  max-width: 600px;
-  @media (${device.mobile}) { {
-    justify-content: space-around;
-    flex-wrap: wrap;
-    width: 90%;
-    padding-bottom: 1.5rem;
-  }
+  height: 50px;
+  padding: 0 10px;
+  
 `;
-export const Button = styled.button`
-  position: relative;
-  border-radius: 100%;
-  padding: 0px;
-  margin: 0px;
-  width: 35px;
-  height: 35px;
-  background-color: #363848;
-  border: 0;
-  top: 0;
-  transition: 0.3s;
+export const CategoryGroup = styled.div``;
+export const CategoryBtn = styled.button`
+  padding: 5px 7px;
+  margin: 0 2px;
+  border: 1.5px solid rgb(0, 0, 0, 0.2);
+  border-radius: 3px;
+  font-weight: 700;
+  font-size: 10px;
   cursor: pointer;
+  color: ${(props) => (props.active ? color.lightGreen : color.darkGreen)};
+  background-color: ${(props) =>
+    props.active ? color.darkGreen : color.lightGreen};
+
   &:hover {
-    background-color: #2b2d3a;
+    background-color: ${color.darkGreen};
+    color: ${color.lightGreen};
   }
 `;
-export const CategoryGroup = styled.div`
-  display: flex;
-  justify-content: space-between;
-
-  button {
-    padding: 0.8rem 0.8rem;
-
-    border-radius: 5px;
-    background-color: #dadfdf;
-    border: 2px solid rgba(47, 79, 79, 0.6);
-    color: rgba(47, 79, 79, 1);
-    font-weight: 800;
-    transition: all 0.3s;
-
-    &:not(:last-child) {
-      margin-right: 3px;
-    }
-
-    &:hover {
-      color: white;
-      background-color: rgba(47, 79, 79, 1);
-      transform: scale(0.9);
-    }
-
-    @media (${device.mobile}) {
-      padding: 0.7rem 1.5rem;
-      font-size: 20px;
-      &:not(:last-child) {
-        margin-right: 12px;
-      }
-    }
-  }
-
-  .active {
-    color: white;
-    background-color: rgba(47, 79, 79, 1);
-    transform: scale(0.9);
-  }
-  @media (${device.mobile}) {
-    padding-bottom: 2.5rem;
-    justify-content: center;
-    width: 100%;
-  }
+export const SubmitBtn = styled.button`
+  border-radius: 3px;
+  border: none;
+  margin: 0 2px;
+  padding: 5px 25px;
+  border: 1.5px solid rgb(0, 0, 0, 0.2);
+  color: ${color.darkPink};
+  cursor: pointer;
+  font-weight: 700;
+  background-color: ${color.pink};
+  font-size: 10px;
+  animation-name: ${(props) => (props.active ? submitError : "")};
+  animation-duration: ${(props) => (props.active ? ".5s" : "")};
 `;

@@ -1,89 +1,106 @@
 import styled from "styled-components";
 import { fadeIn, fadeOut } from "../../Keyframes/ListItemAnimation";
-import {device} from '../../Theme'
+import { color } from "../../Theme";
 
-export const StyledListItem = styled.li`
+export const StyledListItem = styled.div`
+  position: relative;
+  display: grid;
+  grid-template-columns: 600;
+  grid-template-rows: 50px auto;
+  grid-template-areas:
+    "header"
+    "content";
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  @media (${device.mobile}) {
-    width: 90%;
-
-    margin: 2rem auto;
-  }
+  border-radius: 3px;
+  background-color: #2f4f4f;
   &:not(:last-of-type) {
     margin-bottom: 1.5rem;
   }
   animation-name: ${(props) => (props.isHidden ? fadeIn : fadeOut)};
   animation-duration: 0.3s;
+  box-shadow: 0.2rem 0.2rem 0.2rem 0.1rem rgb(0 0 0 / 20%);
 
-  .Category {
-    width: 10%;
-    height: 3rem;
+`;
 
-    background-color: #d0b0b0;
-    border-radius: 2rem;
-    line-height: 3rem;
-    font-size: 1.4rem;
-    color: #3f3f3f;
-    box-shadow: 0.2rem 0.2rem 0.2rem 0.1rem rgba(0, 0, 0, 0.2);
-    @media (${device.mobile}) {
-      width: 15%;
-      font-weight: 700;
-      font-size: 16px;
-    }
-  }
-  .Task {
-    width: 70%;
-    height: 3.5rem;
-    background: #3f3f3f;
-    border-radius: 1rem;
-    line-height: 3.5rem;
-    text-align: center;
-    background-color: #dadfdf;
-    box-shadow: 0.2rem 0.2rem 0.2rem 0.1rem rgba(0, 0, 0, 0.2);
-    font-size: 20px;
-    @media (${device.mobile}) {
-      width: 50%;
-      font-size: 20px;
-    }
-  }
-  input {
-    width: 100%;
-    outline: none;
-    border: none;
-    text-align: center;
-    font-size: 20px;
+export const Header = styled.div`
+  position: relative;
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  padding: 7px;
+`;
+export const Status = styled.div`
+  color: ${(props) => (props.status ? color.darkPink : color.darkGreen)};
+  background-color: ${(props) =>
+    props.status ? color.pink : color.lightGreen};
+  border-radius: 3px;
+  box-shadow: 0.2rem 0.2rem 0.2rem 0.1rem rgb(0 0 0 / 20%);
+  padding: 3px 5px;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 24px;
+  margin-right: 7px;
+  cursor: pointer;
+  transition: all 0.2s;
+`;
+export const Category = styled.div`
+  color: #dadfdf;
+  margin-right: 3px;
+  font-weight: 700;
+  font-size: 10px;
+  cursor:default;
+`;
+export const CreatedTime = styled.div`
+  font-weight: 700;
+  font-size: 10px;
+  color: #dadfdf;
+  cursor:default;
 
-    font-weight: bold;
-    background-color: #dadfdf;
-    color: #3f3f3f;
-  }
-  .EditBtn {
-    height: 3.5rem;
-    width: 3.5rem;
-    border-radius: 50%;
-    border: 0;
-    margin: 0 0px;
-    box-shadow: 0.2rem 0.2rem 0.2rem 0.1rem rgba(0, 0, 0, 0.2);
-    background-color: #dadfdf;
+`;
+export const Content = styled.div`
+  grid-area: content;
+  padding: 0 7px 7px 7px;
+  overflow : hidden;
+  line-height:.5;
+  cursor:pointer;
 
-    &:not(:last-of-type) {
-      margin: 0.3rem 0.5rem 0 0;
-    }
-    transition: 0.4s;
-    &:hover {
-      background-color: #92a3a2;
-    }
-  }
-  .ProgressBtn {
-    width: 17px;
-    height: 17px;
-    transition: all 0.2s;
-  }
-  .exit {
-    transform: scale(0);
-  }
+`;
+export const Text = styled.div`
+  background-color: #dadfdf;
+  border-radius: 3px;
+  padding: 7px 7px;
+  font-wight: 700;
+  font-size: 14px;
+  text-align:left;
+  line-height: 20px;
+  letter-spacing:1.5px;
+  word-wrap:break-word;
+  
+`;
+export const Input = styled.textarea`
+  width:100%;
+  background-color: #dadfdf;
+  border-radius: 3px;
+  padding: 7px 7px;
+  font-wight: 700;
+  font-size: 14px;
+  text-align:left;
+  line-height: 20px;
+  letter-spacing:1.5px;
+  outline:none;
+  border:none;
+  word-wrap:break-word;
+  font-family: serif, sans-serif;
+`;
+export const DeleteBtn = styled.button`
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  color: #dadfdf;
+  background-color: #2f4f4f;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 15px;
 `;

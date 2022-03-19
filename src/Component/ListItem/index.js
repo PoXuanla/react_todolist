@@ -1,32 +1,36 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faTrash,
-  faPen,
-  faCircle,
-  faCheck,
-} from "@fortawesome/free-solid-svg-icons";
 import TaskContext from "../../Store/TaskContext";
-import { useState, useContext, useRef } from "react";
-import { StyledListItem } from "./Styles";
+import { useState, useContext, useRef, useEffect } from "react";
+import {
+  StyledListItem,
+  Header,
+  Status,
+  Category,
+  CreatedTime,
+  DeleteBtn,
+  Content,
+  Text,
+  Input,
+} from "./Styles";
 const ListItem = (props) => {
   const TaskCtx = useContext(TaskContext);
   const [isEdit, setIsEdit] = useState(false);
   const [isHidden, setIsHidden] = useState(true);
-  const [progressAnimation, setProgressAnimation] = useState(false);
-
+  const [textAreaValue, setTextAreaValue] = useState(props.task);
+  const TextRef = useRef();
+  const [textHeight, setTextHeight] = useState(null);
   const inputRef = useRef();
-  
-  const changeProgressHandler = () => {
+  const categorySurface = { Work: "工作", Study: "學習", Other: "其他" };
+  useEffect(() => {
+    if (isEdit) {
+      inputRef.current.style.height = "0px";
+      const scrollHeight = inputRef.current.scrollHeight;
+      inputRef.current.style.height = scrollHeight + "px";
+    }
+  }, [textAreaValue, isEdit]);
+
+  const changeStatusHandler = () => {
     TaskCtx.changeStatus(props.id);
-    setProgressAnimation(true);
-
-    const time = setTimeout(() => {
-      setProgressAnimation(false);
-
-      clearTimeout(time);
-    }, 200);
   };
-
   const removeTaskHandler = () => {
     setIsHidden(false);
     setTimeout(() => {
@@ -34,96 +38,61 @@ const ListItem = (props) => {
     }, 300);
   };
   const editHandler = () => {
+    setTextHeight(TextRef.current.clientHeight);
     setIsEdit(true);
     setTimeout(() => {
       inputRef.current.focus();
-    }, 1);
+      inputRef.current.selectionStart = textAreaValue.length;
+      inputRef.current.selectionEnd = textAreaValue.length;
+      console.log(inputRef.current.selectionEnd);
+    }, 0.1);
   };
   const onBlurHandler = () => {
-    TaskCtx.editTask(props.id, inputRef.current.value);
+    if (inputRef.current.value.trim() === "") return;
+    TaskCtx.updateTask(props.id, inputRef.current.value);
     setIsEdit(false);
   };
-  const contentDBClickHandler = () => {
-    setIsEdit(true);
-    setTimeout(() => {
-      inputRef.current.focus();
-    }, 1);
-  };
+
   const onKeyPressHandler = (event) => {
-    if (event.key === "Enter") {
-      TaskCtx.editTask(props.id, inputRef.current.value);
+    if (event.key === "Enter" && !event.key === "Shift") {
+      if (inputRef.current.value.trim() === "") {
+        setIsEdit(false);
+        return;
+      }
+      TaskCtx.updateTask(props.id, inputRef.current.value);
       setIsEdit(false);
     }
   };
-  const notFinishBtn = (
-    <button
-      className={`ProgressBtn ${progressAnimation ? "exit" : ""}  `}
-      onClick={changeProgressHandler}
-    >
-      <FontAwesomeIcon
-        icon={faCircle}
-        style={{
-          width: "100%",
-          height: "100%",
-          color: "#d0b0b0",
-          cursor: "pointer",
-          filter: "drop-shadow(2px 2px .5px rgba(0,0,0,.5))",
-        }}
-      />
-    </button>
-  );
-  const FinishBtn = (
-    <button
-      className={`ProgressBtn ${progressAnimation ? "exit" : ""}`}
-      onClick={changeProgressHandler}
-    >
-      <FontAwesomeIcon
-        icon={faCheck}
-        style={{
-          width: "100%",
-          height: "100%",
-          color: "#d0b0b0",
-          cursor: "pointer",
-          filter: "drop-shadow(2px 2px .5px rgba(0,0,0,.5))",
-        }}
-      />
-    </button>
-  );
+  const textAreaValueHandler = (e) => {
+    setTextAreaValue(e.target.value);
+  };
+
   return (
     <StyledListItem isHidden={isHidden}>
-      {props.finish ? FinishBtn : notFinishBtn}
-
-      <div className="Category">{props.category}</div>
-      <div className="Task">
-        {
-          <input
-            defaultValue={props.task}
+      <Header>
+        <Status status={props.status} onClick={changeStatusHandler}>
+          {props.status ? "已完成" : "未完成"}
+        </Status>
+        <Category>{`${categorySurface[props.category]} ･ `}</Category>
+        <CreatedTime>{`${new Date(props.created_time).toLocaleString()}`}</CreatedTime>
+        <DeleteBtn onClick={removeTaskHandler}>x</DeleteBtn>
+      </Header>
+      <Content>
+        {isEdit ? (
+          <Input
+            defaultValue={textAreaValue}
             ref={inputRef}
-            style={{ display: isEdit ? " " : "none" }}
-            // display={isEdit ? " " : "none"}
             onBlur={onBlurHandler}
             onKeyPress={onKeyPressHandler}
-          />
-        }
-        {!isEdit ? (
-          <div
-            onDoubleClick={contentDBClickHandler}
-            style={{ userSelect: "none", color: "#3f3f3f" }}
-          >
-            {props.task}
-          </div>
+            onChange={textAreaValueHandler}
+            style={{ height: textHeight }}
+          ></Input>
         ) : (
-          ""
+          <Text onClick={editHandler} ref={TextRef}>
+            {props.task}
+          </Text>
         )}
-      </div>
-      <div>
-        <button onClick={editHandler} className="EditBtn">
-          <FontAwesomeIcon icon={faPen}></FontAwesomeIcon>
-        </button>
-        <button onClick={removeTaskHandler} className="EditBtn">
-          <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
-        </button>
-      </div>
+      </Content>
     </StyledListItem>
   );
 };

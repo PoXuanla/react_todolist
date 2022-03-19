@@ -7,20 +7,21 @@ const Task = (props) => {
 
   const TaskCtx = useContext(TaskContext);
   
-  const ListItems = TaskCtx.tasks.map((task) => {
+  const ListItems = TaskCtx.arrangedTasks.map((task) => {
     return (
       <ListItem
         id={task.id}
         task={task.task}
+        created_time={task.created_time}
         category={task.category}
-        finish={task.finish}
+        status={task.status}
         key={task.id}
       />
     );
   });
   const List = (
     <Container>
-      {ListItems.length !== 0 ? ListItems : <Text>Nothing to do.</Text>}
+      {ListItems.length !== 0 ? ListItems : <Text>無</Text>}
     </Container>
   );
   return <StyledTask>{List}</StyledTask>;
